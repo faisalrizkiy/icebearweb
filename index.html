@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icebear Web Store — Template Ucapan Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:       #1a0f14;
+  --card:     #241419;
+  --border:   rgba(232,190,199,0.14);
+  --border-h: rgba(232,190,199,0.4);
+  --rose:     #c9576f;
+  --rose-soft:#e8a7b6;
+  --rose-dim: rgba(201,87,111,0.10);
+  --gold:     #c9a24a;
+  --text:     #e6d3d8;
+  --muted:    #8d6b74;
+  --white:    #fbf1f3;
+  --font-d:   'Playfair Display', serif;
+  --font-s:   'Jost', sans-serif;
+}
+
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-s);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse 70% 38% at 50% 0%, rgba(201,87,111,.14) 0%, transparent 68%),
+    radial-gradient(ellipse 50% 28% at 85% 85%, rgba(201,162,74,.06) 0%, transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+/* NAV */
+nav {
+  position:sticky; top:0; z-index:900;
+  background:rgba(26,15,20,.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 5%; height:60px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo {
+  font-family:var(--font-d); font-style:italic; font-size:1.25rem; font-weight:700;
+  color:var(--white); text-decoration:none;
+  display:flex; align-items:center; gap:9px; letter-spacing:.02em;
+}
+.nav-logo-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--rose); box-shadow:0 0 9px var(--rose);
+  animation:pulse 3s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:.75; }
+  50%      { opacity:1; }
+}
+.nav-links { list-style:none; display:flex; gap:26px; }
+.nav-links a {
+  text-decoration:none; color:var(--muted);
+  font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--rose-soft); }
+
+/* HERO */
+.hero {
+  position:relative; text-align:center;
+  padding:88px 20px 64px; overflow:hidden; z-index:1;
+}
+.hero-flourish {
+  font-family:var(--font-d); font-style:italic; font-size:1.6rem;
+  color:var(--rose-soft); margin-bottom:6px; opacity:.9;
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--rose-dim); border:1px solid rgba(201,87,111,.28);
+  border-radius:999px; padding:5px 15px;
+  font-size:.7rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--rose-soft); margin-bottom:22px;
+}
+.hero h1 {
+  font-family:var(--font-d); font-size:clamp(2.3rem,5.8vw,4.2rem);
+  font-weight:700; color:var(--white); line-height:1.14;
+  letter-spacing:-.01em; margin-bottom:18px;
+}
+.hero h1 em { font-style:italic; color:var(--rose); }
+.hero-divider {
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  margin:0 auto 22px;
+}
+.hero-divider .line { width:34px; height:1px; background:linear-gradient(90deg,transparent,var(--rose)); }
+.hero-divider .line.r { background:linear-gradient(90deg,var(--rose),transparent); }
+.hero-divider i { color:var(--rose); font-size:.7rem; }
+.hero-sub {
+  color:var(--muted); font-size:1rem;
+  max-width:440px; margin:0 auto 42px; line-height:1.75;
+}
+.hero-stats { display:flex; justify-content:center; gap:52px; flex-wrap:wrap; }
+.stat { text-align:center; }
+.stat-num { font-family:var(--font-d); font-size:1.85rem; font-weight:700; color:var(--white); line-height:1; }
+.stat-num span { color:var(--rose); }
+.stat-label { font-size:.68rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-top:6px; }
+
+/* DIVIDER */
+.section-divider {
+  display:flex; align-items:center; gap:16px;
+  max-width:1160px; margin:0 auto 44px; padding:0 20px;
+}
+.section-divider::before, .section-divider::after {
+  content:''; flex:1; height:1px; background:var(--border);
+}
+.section-divider-label {
+  font-family:var(--font-d); font-style:italic;
+  font-size:.95rem; font-weight:600;
+  color:var(--rose-soft); white-space:nowrap;
+}
+
+/* GRID */
+.container { max-width:1160px; margin:0 auto; padding:0 20px 80px; position:relative; z-index:1; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+
+/* CARD */
+.card {
+  background:var(--card); border-radius:14px;
+  border:1px solid var(--border); overflow:hidden;
+  transition:border-color .3s, transform .25s, box-shadow .3s;
+  position:relative;
+}
+.card:hover {
+  border-color:var(--border-h);
+  transform:translateY(-5px);
+  box-shadow:0 20px 46px rgba(201,87,111,.16);
+}
+.card-badge {
+  position:absolute; top:12px; right:12px;
+  background:rgba(26,15,20,.75); border:1px solid var(--border);
+  border-radius:999px; font-size:.63rem; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--rose-soft); padding:3px 11px;
+  backdrop-filter:blur(8px); z-index:2;
+}
+.card-badge.best { background:rgba(201,162,74,.15); border-color:rgba(201,162,74,.32); color:var(--gold); }
+
+.thumbnail { width:100%; height:200px; object-fit:cover; display:block; }
+.thumb-placeholder {
+  width:100%; height:200px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:2.8rem;
+}
+
+.card-content { padding:20px 20px 22px; }
+.card-title {
+  font-family:var(--font-d); font-size:1.2rem; font-weight:700;
+  color:var(--white); margin-bottom:7px;
+  display:flex; align-items:center; gap:9px;
+}
+.card-title i { color:var(--rose); font-size:.9rem; }
+.card-desc { color:var(--muted); font-size:.845rem; margin-bottom:18px; min-height:40px; line-height:1.65; }
+
+.free-request {
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  padding:9px 12px;
+  background:var(--rose-dim); border:1px solid rgba(201,87,111,.16);
+  border-radius:9px; margin-bottom:14px;
+}
+.free-request-label {
+  font-size:.63rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--rose-soft); white-space:nowrap;
+}
+.free-request-items { display:flex; gap:5px; flex-wrap:wrap; }
+.free-tag {
+  font-size:.72rem; font-weight:500; color:var(--text);
+  background:rgba(255,255,255,.03); border:1px solid var(--border);
+  border-radius:999px; padding:2px 9px; white-space:nowrap;
+}
+
+.price-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:9px 12px; background:rgba(255,255,255,.02);
+  border-radius:8px; border:1px solid var(--border); margin-bottom:14px;
+}
+.price-label { font-size:.68rem; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
+.price-value { font-family:var(--font-d); font-size:1.3rem; font-weight:700; color:var(--rose-soft); }
+
+.card-actions { display:flex; flex-direction:column; gap:8px; }
+.btn-demo {
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  padding:10px 14px; border-radius:9px;
+  border:1px solid var(--border); background:transparent;
+  color:var(--text); font-family:var(--font-s); font-size:.84rem; font-weight:500;
+  cursor:pointer; text-decoration:none; width:100%;
+  transition:border-color .2s, background .2s, color .2s;
+}
+.btn-demo:hover { border-color:var(--border-h); background:var(--rose-dim); color:var(--white); }
+.btn-demo i { color:var(--rose-soft); }
+
+.btn-order {
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  padding:12px 14px; border-radius:9px; border:none;
+  background:linear-gradient(135deg,var(--rose),#a83d54);
+  color:var(--white); font-family:var(--font-s); font-size:.87rem; font-weight:600;
+  cursor:pointer; text-decoration:none; width:100%; letter-spacing:.01em;
+  transition:filter .2s, box-shadow .2s;
+}
+.btn-order:hover { filter:brightness(1.08); box-shadow:0 8px 24px rgba(201,87,111,.35); }
+
+/* MODAL LIVE DEMO — dibungkus dalam frame ala ponsel agar tidak
+   terpotong di layar PC, karena template memang didesain mobile. */
+.modal-demo {
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(12,6,9,.96);
+  align-items:center; justify-content:center; flex-direction:column;
+  gap:12px; padding:16px;
+}
+.modal-demo.active { display:flex; }
+.demo-header {
+  display:flex; align-items:center; justify-content:space-between;
+  width:100%; max-width:420px;
+}
+.demo-title { font-family:var(--font-d); font-style:italic; font-size:1rem; font-weight:700; color:var(--white); }
+.demo-close {
+  background:rgba(255,255,255,.06); border:1px solid var(--border);
+  border-radius:8px; color:var(--muted); font-family:var(--font-s);
+  font-size:.83rem; cursor:pointer; padding:6px 13px;
+  display:flex; align-items:center; gap:6px;
+  transition:color .2s, background .2s;
+}
+.demo-close:hover { color:var(--white); background:var(--rose-dim); border-color:var(--border-h); }
+
+.demo-wrapper {
+  position:relative;
+  width:min(400px, 100%);
+  height:min(88vh, 840px);
+  border-radius:22px; overflow:hidden;
+  border:1px solid var(--border);
+  background:var(--bg);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);
+}
+.demo-iframe {
+  width:100%; height:100%; border:none; display:block;
+  overflow-y:auto; -webkit-overflow-scrolling:touch;
+}
+.demo-notice { font-size:.75rem; color:var(--muted); text-align:center; max-width:420px; }
+.demo-notice a { color:var(--rose-soft); text-decoration:none; }
+
+/* FOOTER */
+footer {
+  background:rgba(255,255,255,.015); border-top:1px solid var(--border);
+  padding:48px 20px 36px; text-align:center; position:relative; z-index:1;
+}
+.footer-logo { font-family:var(--font-d); font-style:italic; font-size:1.4rem; font-weight:700; color:var(--white); margin-bottom:12px; display:inline-block; }
+.footer-tagline { color:var(--muted); font-size:.845rem; margin-bottom:24px; }
+.footer-socials { display:flex; justify-content:center; gap:14px; margin-bottom:28px; }
+.footer-socials a {
+  width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--muted); text-decoration:none; font-size:.9rem;
+  transition:color .2s, border-color .2s, background .2s;
+}
+.footer-socials a:hover { color:var(--rose-soft); border-color:var(--border-h); background:var(--rose-dim); }
+.footer-copy { color:var(--muted); font-size:.78rem; }
+.footer-copy span { color:var(--rose); }
+
+@media (max-width:640px) {
+  .hero h1 { font-size:2.2rem; }
+  .nav-links { display:none; }
+  .hero-stats { gap:24px; }
+  .demo-wrapper { width:100%; height:min(80vh, 100%); border-radius:16px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><span class="nav-logo-dot"></span>Icebear</a>
+  <ul class="nav-links">
+    <li><a href="#templates">Template</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-flourish">untuk seseorang yang istimewa</div>
+  <div class="hero-eyebrow"><i class="fas fa-heart"></i> Template Web Ucapan Premium</div>
+  <h1>Hadiahkan Momen<br><em>yang Tak Terlupakan</em></h1>
+  <div class="hero-divider"><span class="line"></span><i class="fas fa-heart"></i><span class="line r"></span></div>
+  <p class="hero-sub">Template web ucapan dengan animasi, musik, dan foto — dirangkai penuh rasa, siap pakai dalam hitungan menit.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" id="statCount">6<span>+</span></div><div class="stat-label">Template Aktif</div></div>
+    <div class="stat"><div class="stat-num">100<span>+</span></div><div class="stat-label">Pelanggan Puas</div></div>
+    <div class="stat"><div class="stat-num">13<span>rb</span></div><div class="stat-label">Mulai Dari</div></div>
+  </div>
+</header>
+
+<div id="templates">
+  <div class="section-divider"><span class="section-divider-label">Pilih Template</span></div>
+  <div class="container">
+    <div class="grid" id="cardGrid"></div>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="footer-logo">Icebear</div>
+  <p class="footer-tagline">Template Web Ucapan Premium — Mudah, Cepat, Berkesan.</p>
+  <div class="footer-socials">
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <a href="https://wa.me/628892250711"><i class="fab fa-whatsapp"></i></a>
+  </div>
+  <p class="footer-copy">© 2026 Icebear Web Store · Dibuat dengan <span>♥</span> di Indonesia</p>
+</footer>
+
+<div id="modalDemo" class="modal-demo">
+  <div class="demo-header">
+    <span class="demo-title" id="demoTitle">Live Demo</span>
+    <button class="demo-close" onclick="closeDemo()"><i class="fas fa-times"></i> Tutup</button>
+  </div>
+  <div class="demo-wrapper">
+    <iframe class="demo-iframe" id="demoFrame" src="" sandbox="allow-scripts allow-same-origin allow-forms" scrolling="yes"></iframe>
+  </div>
+  <p class="demo-notice">
+    Preview demo dalam tampilan ponsel — sesuai desain aslinya. &nbsp;
+    <a href="https://wa.me/628892250711">Pesan via WhatsApp →</a>
+  </p>
+</div>
+
+<script>
+// ============================================================
+//  DATA TEMPLATE — Tambah web baru cukup di sini saja ✏️
+// ============================================================
+const WA = '628892250711';
+
+const TEMPLATES = [
+  {
+    id: 1,
+    name: 'Web #1',
+    icon: 'fa-heart',
+    emoji: '💖',
+    desc: 'Romantis dengan musik latar, galeri foto, dan animasi lembut yang menyentuh hati.',
+    price: 'Rp 13.000',
+    badge: 'Populer',
+    badgeClass: '',
+    thumb: 'img/thumb1.jpg',
+    thumbBg: 'linear-gradient(135deg,#241419,#3a1c26)',
+    demo: 'https://demoweb1.icebearweb.workers.dev/',
+  },
+  {
+    id: 2,
+    name: 'Web #2',
+    icon: 'fa-birthday-cake',
+    emoji: '🎂',
+    desc: 'Ulang tahun interaktif dengan animasi meriah, slideshow foto, dan kejutan spesial.',
+    price: 'Rp 13.000',
+    badge: '⭐ Best Seller',
+    badgeClass: 'best',
+    thumb: 'img/thumb2.jpg',
+    thumbBg: 'linear-gradient(135deg,#281624,#3f1e34)',
+    demo: 'https://demoweb2.icebearweb.workers.dev/',
+  },
+  {
+    id: 3,
+    name: 'Web #3',
+    icon: 'fa-star',
+    emoji: '🎁',
+    desc: 'Hadiah digital unik untuk sahabat, pasangan, atau keluarga tersayang.',
+    price: 'Rp 13.000',
+    badge: '',
+    badgeClass: '',
+    thumb: 'img/thumb3.jpg',
+    thumbBg: 'linear-gradient(135deg,#201420,#341e30)',
+    demo: 'https://demoweb3.icebearweb.workers.dev/',
+  },
+  {
+    id: 4,
+    name: 'Web #4',
+    icon: 'fa-gem',
+    emoji: '✨',
+    desc: 'Foto kenangan, lagu favorit, dan pesan spesial dalam satu halaman elegan.',
+    price: 'Rp 15.000',
+    badge: '',
+    badgeClass: '',
+    thumb: 'img/thumb4.jpg',
+    thumbBg: 'linear-gradient(135deg,#241620,#3a1e32)',
+    demo: 'https://demoweb4.icebearweb.workers.dev/',
+  },
+  {
+    id: 5,
+    name: 'Web #5',
+    icon: 'fa-crown',
+    emoji: '🎉',
+    desc: 'Versi premium dengan animasi cinematic, efek partikel, dan desain yang mewah.',
+    price: 'Rp 20.000',
+    badge: 'Premium',
+    badgeClass: '',
+    thumb: 'img/thumb5.jpg',
+    thumbBg: 'linear-gradient(135deg,#221420,#381c30)',
+    demo: 'https://demoweb5.icebearweb.workers.dev/',
+  },
+  {
+    id: 6,
+    name: 'Web #6',
+    icon: 'fa-gem',
+    emoji: '✨',
+    desc: 'Ucapan Birthday dengan foto kenangan, lagu favorit, dan pesan spesial dalam satu halaman.',
+    price: 'Rp 20.000',
+    badge: '',
+    badgeClass: '',
+    thumb: 'img/thumb6.jpg',
+    thumbBg: 'linear-gradient(135deg,#261622,#3c1e34)',
+    demo: 'https://web6.icebearweb.workers.dev/',
+  },
+  // ➕ Tambah template baru di sini:
+  {
+  id: 7,
+  name: 'Web #7',
+  icon: 'fa-heart',
+  emoji: '🌙',
+  desc: 'Rayakan ulang tahun dengan cara yang seru! Pecahkan balon untuk membuka pesan kejutan, lalu nikmati galeri foto, musik, dan ucapan penuh makna.',
+  price: 'Rp 20.000',
+  badge: 'Baru',
+  badgeClass: '',
+  thumb: 'img/thumb7.jpg',
+  thumbBg: 'linear-gradient(135deg,#0a1020,#142030)',
+  demo: 'https://web7-one.vercel.app/',
+  },
+];
+
+// ============================================================
+//  RENDER — Jangan ubah bagian ini
+// ============================================================
+function waLink(t) {
+  const msg = `Halo Icebear! Saya ingin pesan ${t.name} (${t.price}) 🎉\n\nMohon info lebih lanjut ya, terima kasih!`;
+  return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+}
+
+function renderCards() {
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = TEMPLATES.map(t => `
+    <div class="card">
+      ${t.badge ? `<div class="card-badge ${t.badgeClass}">${t.badge}</div>` : ''}
+      <img src="${t.thumb}" class="thumbnail"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="thumb-placeholder" style="display:none;background:${t.thumbBg}">${t.emoji}</div>
+      <div class="card-content">
+        <div class="card-title"><i class="fas ${t.icon}"></i> ${t.name}</div>
+        <div class="card-desc">${t.desc}</div>
+        <div class="free-request">
+          <span class="free-request-label">✦ Free</span>
+          <div class="free-request-items">
+            <span class="free-tag">Ganti Teks</span>
+            <span class="free-tag">Ganti Foto</span>
+            <span class="free-tag">Ganti Lagu</span>
+          </div>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Harga</span>
+          <span class="price-value">${t.price}</span>
+        </div>
+        <div class="card-actions">
+          <button class="btn-demo" onclick="openDemo('${t.demo}','${t.name}')">
+            <i class="fas fa-eye"></i> Live Demo
+          </button>
+          <a class="btn-order" href="${waLink(t)}" target="_blank">
+            <i class="fab fa-whatsapp"></i> Pesan Sekarang
+          </a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Update stat count otomatis
+  document.getElementById('statCount').innerHTML = `${TEMPLATES.length}<span>+</span>`;
+}
+
+// ============================================================
+//  LIVE DEMO MODAL
+// ============================================================
+function openDemo(url, title) {
+  document.getElementById('demoTitle').textContent = 'Live Demo — ' + title;
+  document.getElementById('demoFrame').src = url;
+  document.getElementById('modalDemo').classList.add('active');
+}
+function closeDemo() {
+  document.getElementById('modalDemo').classList.remove('active');
+  document.getElementById('demoFrame').src = '';
+}
+document.getElementById('modalDemo').addEventListener('click', function(e) {
+  if (e.target === this) closeDemo();
+});
+document.getElementById('modalDemo').addEventListener('contextmenu', e => e.preventDefault());
+
+renderCards();
+</script>
+</body>
+</html>
